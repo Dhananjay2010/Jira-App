@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .container {
+            height: 100vh;
+            width: 100vw;
+            border: 2px solid;
+        }
+
+        .nav-bar {
+            background-color: #333333;
+            height: 10%;
+            display: flex;
+            /* border: 4px solid; */
+
+        }
+
+        .grid {
+            background-color: #f2f2f2;
+            min-height: 90%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+
+
+            /* border: 4px solid; */
+        }
+
+        .action-container,
+        .filter-container {
+            height: 75%;
+            width: 15rem;
+            /* border: 2px solid green; */
+            margin-left: 4rem;
+            margin-top: 1.25vh;
+            background-color: #444444;
+
+        }
+
+        .filter-container {
+            width: 16rem;
+            border-radius: 4px;
+            display: flex;
+        }
+
+        .action-container {
+            width: 8rem;
+            border-radius: 4px;
+            display: flex;
+        }
+
+        .filter {
+            width: 25%;
+            height: 100%;
+            /* border: 2px solid olive; */
+        }
+
+        .add,
+        .delete {
+            font-size: 3rem;
+            font-family: Arial;
+            text-align: center;
+            width: 50%;
+            height: 100%;
+            /* border: 2px solid olive; */
+            color: white
+        }
+
+        .add {
+            font-size: 3rem;
+        }
+
+        .delete {
+            font-size: 2.5rem;
+        }
+
+        .pink-color-btn,
+        .blue-color-btn,
+        .green-color-btn,
+        .black-color-btn {
+            margin: auto;
+            border-radius: 3px;
+            height: 50%;
+            width: 50%;
+            /* border: 2px solid red; */
+            margin-top: 1.875vh;
+        }
+
+        .delete-state{
+            background-color: #393939 !important;
+        }
+
+        .add:hover,
+        .delete:hover {
+            background-color: #393939;
+        }
+
+ 
+
+        .filter:hover {
+            background-color: #393939;
+        }
+
+        .pink-color-btn,
+        .pink {
+            background-color: #d595aa;
+        }
+
+        .blue-color-btn,
+        .blue {
+            background-color: #5cedde;
+        }
+
+        .green-color-btn,
+        .green {
+            background-color: #91ec67;
+        }
+
+        .black-color-btn,
+        .black {
+            background-color: black;
+        }
+
+        .modal-container {
+            height: 18rem;
+            width: 34rem;
+            /* border:solid blue; */
+            display: flex;
+            position: fixed;
+            top: calc((100vh - 18rem) / 2);
+            left: calc((100vw - 34rem) / 2);
+            box-shadow: 0px 0px 19px -3px black;
+        }
+
+        .writing-area {
+            height: 100%;
+            width: 70%;
+            /* border: solid violet; */
+            background-color: white;
+            padding: 1.5rem;
+            outline: none;
+            font-size: 1.5rem;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: auto;
+        }
+
+        .filter-area {
+            height: 100%;
+            width: 30%;
+            /* border: solid yellow; */
+            background-color: #444;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-filter {
+            height: 2.1rem;
+            width: 50%;
+            /* border:solid yellow ; */
+            margin-bottom: 5px;
+            margin-top: .7rem;
+            opacity: 0.8;
+        }
+
+        .ticket{
+            height: 8rem;
+            width: 15rem;
+            margin: 1.5px;
+            background-color:white;
+            margin-top: 7px;
+            transition:all 1s;
+            
+            
+        }
+
+        .ticket:hover{
+            transform: scale(1.2);
+        }
+
+        .ticket-color{
+            width: 100%;
+            height: 8%;
+            /* background-color: red; */
+            
+        }
+
+        .ticket-id{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            width:100%;
+            height:18%;
+            /* border: solid; */
+            padding-left: 5px;
+            font-weight: bold;
+            padding-left: 10px;
+            padding-top: 4px;
+            
+        }
+        .ticket-box{
+            height:74%;
+            width: 100%;
+            /* border: solid; */
+            outline: none;  
+            padding-top: 5px;
+            padding-left: 8px;
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+            overflow: auto;
+        }
+
+        .active-modal-filter{
+            border: 5px solid red;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <div class="filter-container">
+                <div class="filter">
+                    <div class="pink-color-btn"></div>
+                </div>
+                <div class="filter">
+                    <div class="blue-color-btn"></div>
+                </div>
+                <div class="filter">
+                    <div class="green-color-btn"></div>
+                </div>
+                <div class="filter">
+                    <div class="black-color-btn"></div>
+                </div>
+            </div>
+            <div class="action-container">
+                <div class="add">+</div>
+                <div class="delete">x</div>
+            </div>
+        </div>
+        <div class="grid">
+            <!-- <div class="ticket">
+                <div class="ticket-color"></div>
+                <div class="ticket-id">IDRKD56</div>
+                <div class="ticket-box" contenteditable ></div>
+
+            </div> -->
+        </div>
+    </div>
+
+    <!-- <div class="modal-container">
+        <div class="writing-area" contenteditable>Enter Your Task</div>
+        <div class="filter-area">
+            <div class="modal-filter pink"></div>
+            <div class="modal-filter blue"></div>
+            <div class="modal-filter green"></div>
+            <div class="modal-filter black"></div>
+
+        </div>
+    </div> -->
+    <script src="https://cdn.jsdelivr.net/npm/short-unique-id@latest/dist/short-unique-id.min.js"></script>
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
