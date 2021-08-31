@@ -4,7 +4,7 @@ let addBtn = document.querySelector(".add");
 let body = document.querySelector("body");
 let modalVisible = false;
 
-var uid = new ShortUniqueId();
+// var uid = new ShortUniqueId();
 let carr = [];
 let colors = {
     "pink": "#d595aa",
@@ -92,14 +92,14 @@ addBtn.addEventListener("click", function (e) {
             let task = e.currentTarget.innerText;
             let selectedModalFilter = document.querySelector(".active-modal-filter");
             let color = selectedModalFilter.classList[1];
-            let id = uid();
+            let id = Date.now();
             console.log(color);
             console.log(task);
             // let colorCode=colors[color];
             let ticket = document.createElement("div");
             ticket.classList.add("ticket");
             ticket.innerHTML = ` <div class="ticket-color ${color} "></div>
-            <div class="ticket-id">${id}</div>
+            <div class="ticket-id">#${Math.ceil(id/1000000)}</div>
             <div class="ticket-box" contenteditable >
             ${task}
             </div>;`
